@@ -1,10 +1,17 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import gdown 
 
-# Leer el archivo CSV
-datos = "openipf-2024-06-01-5839592a.csv"
-datos_csv = pd.read_csv(datos)
+# URL del archivo en Google Drive
+url = 'https://drive.google.com/uc?id=1UxLOi8l2fV-3JD1YLfIURhBf-VWsMgWe'
+
+# Descargar el archivo CSV desde Google Drive
+output = 'datos.csv'
+gdown.download(url, output, quiet=False)
+
+# Leer el archivo CSV descargado
+datos_csv = pd.read_csv(output)
 
 # Convertir la columna 'Date' a tipo datetime
 datos_csv['Date'] = pd.to_datetime(datos_csv['Date'])
